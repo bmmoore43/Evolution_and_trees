@@ -1,5 +1,7 @@
 # Tree_building
 Use for getting orthologs, protein domain families, building trees, or reconciling trees
+## See Orthofinder to get gene trees and homologs
+For other evolutionary features and for parsing Orthofinder results, see below
 
 ## Mapping PFAM domains to protein sequences
 1. Prep:
@@ -152,3 +154,19 @@ it represents.
     2. Qsub command file in Orthofinder folder
     
             python ~/Github/parse_scripts/qsub_hpc.py -f submit -c commandfile.sh -u john3784 -m 20 -w 2160 -mo OrthoFinder/2016 -p 8
+            
+## Parsing Orthofinder results
+
+### To get Orthogroup pairs and binary matrix
+
+1. To get orthologous pairs (as input of ka/ks), go to Orthologous folder and select species you want orthologues for, then within that folder there are files that compare two species, select a file.
+
+   Run parse_orthofinder_orthologue_file_getpairs.py:
+   
+            python parse_orthofinder_orthologue_file_getpairs.py <species_comparison_file.csv> <abbreviation species 1> <abbreviation species 2>
+            
+            python parse_orthofinder_orthologue_file_getpairs.py Athaliana_167_TAIR10__v__Atrichopoda_291_v1.0.csv Ath_ Atr_
+            
+2. To get a binary matrix of orthologues, where 1 indicates gene has a homolog in given species, and 0 indicates it does not.
+
+   Run get_orthomatrix.py:
